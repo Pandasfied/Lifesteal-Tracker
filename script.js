@@ -111,7 +111,7 @@ async function updateGridWithLiveStatus() {
                 cardElement.setAttribute('data-live', 'false'); // Flag for sorting
                 statusText.innerText = "Offline";
             }
-        });
+        }); // 🌟 Fixed: Perfectly closed the forEach loop block here!
 
         // Step 2: Sort the DOM layout so live streams shift to the top
         const cardsArray = Array.from(grid.children);
@@ -123,6 +123,12 @@ async function updateGridWithLiveStatus() {
 
         // Re-append cards in sorted order
         cardsArray.forEach(card => grid.appendChild(card));
+
+        // Step 3: Update Header counters
+        const totalLive = players.filter(p => statusData[p.name]?.isLive).length;
+        const totalOffline = players.length - totalLive;
+        document.getElementById('live-count').innerText = totalLive;
+        document.getElementById('offline-count').innerText = totalOffline;
 
     } catch (e) {
         console.log("Failed to load global status configuration map file.");
