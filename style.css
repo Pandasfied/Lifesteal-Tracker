@@ -1,0 +1,106 @@
+body {
+    background-color: #121214;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.tracker-container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+h1 {
+    color: #e50914;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.status-indicator {
+    font-size: 0.9rem;
+    color: #aaaaaa;
+    margin-bottom: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Individual Player Card Configuration */
+.player-card {
+    background-color: #1a1a1e;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: white;
+}
+
+.avatar-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #333336;
+    /* OFFLINE BY DEFAULT: Monochrome and Dimmed */
+    filter: grayscale(100%) opacity(40%);
+    transition: filter 0.3s, border-color 0.3s;
+}
+
+.player-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.platform-badge {
+    font-size: 0.75rem;
+    margin-top: 5px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background-color: #333;
+}
+
+/* LIVE STATUS STYLES (Triggered by JS) */
+.player-card.is-live .avatar {
+    filter: grayscale(0%) opacity(100%);
+    border-color: #9146ff; /* Default Twitch Purple */
+    box-shadow: 0 0 15px rgba(145, 70, 255, 0.6);
+}
+
+.player-card.is-live.youtube .avatar {
+    border-color: #ff0000; /* YouTube Red */
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+.player-card.is-live .platform-badge {
+    background-color: #9146ff;
+    animation: pulse 1.5s infinite;
+}
+
+.player-card.is-live.youtube .platform-badge {
+    background-color: #ff0000;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
