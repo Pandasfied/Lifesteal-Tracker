@@ -1,106 +1,242 @@
-body {
-    background-color: #121214;
-    color: #ffffff;
-    font-family: 'Segoe UI', Arial, sans-serif;
+/* Base Layout Settings */
+* {
     margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.tracker-container {
-    width: 100%;
-    max-width: 1200px;
+body {
+    background: radial-gradient(circle at center, #1a0f1a 0%, #0a050a 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+header {
     text-align: center;
+    margin-bottom: 3rem;
 }
 
 h1 {
-    color: #e50914;
-    margin-bottom: 25px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
+    margin-bottom: 1rem;
 }
 
-.grid {
+/* Feature 3: Header Counter Pills Styling */
+.counter-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.counter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.badge-live {
+    border-color: rgba(229, 9, 20, 0.3);
+    color: #ff4d4d;
+}
+
+.pulse-dot {
+    background: #e50914;
+    box-shadow: 0 0 8px #e50914;
+    animation: simple-pulse 1.5s infinite;
+}
+
+.gray-dot {
+    background: #888;
+}
+
+@keyframes simple-pulse {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+/* Grid Framework & Feature 5: Seamless Layout Sorting */
+.grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
 }
 
-/* Offline state (Default style setting) */
+/* Feature 1: The Glassmorphism Card Redesign & Feature 4: Custom Entry Animation */
 .player-card {
-    background-color: #1a1a1e;
-    border-radius: 12px;
-    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid #2a2a30;
-    filter: grayscale(100%);
-    opacity: 0.4;
-    transition: all 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.3s ease, 
+                border-color 0.3s ease;
+    animation: fadeInUp 0.6s ease backwards;
 }
 
+/* Hover States for Glassmorphism Cards */
+.player-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Color Accents for Live states */
+.player-card.is-live {
+    background: rgba(145, 71, 255, 0.05);
+    border-color: rgba(145, 71, 255, 0.4);
+    box-shadow: 0 0 15px rgba(145, 71, 255, 0.15);
+}
+
+.player-card.is-live.live-youtube {
+    background: rgba(229, 9, 20, 0.05);
+    border-color: rgba(229, 9, 20, 0.4);
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.15);
+}
+
+.player-card.is-live:hover {
+    border-color: #9147ff;
+    box-shadow: 0 0 25px rgba(145, 71, 255, 0.3);
+}
+
+.player-card.is-live.live-youtube:hover {
+    border-color: #e50914;
+    box-shadow: 0 0 25px rgba(229, 9, 20, 0.3);
+}
+
+/* Feature 2: Glowing Pulse Rings for Live Avatars */
 .avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-bottom: 8px;
-    border: 3px solid #333;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
+.player-card:hover .avatar {
+    transform: scale(1.08);
+}
+
+.is-live .avatar {
+    border-color: #9147ff;
+    animation: twitch-pulse 2s infinite;
+}
+
+.is-live.live-youtube .avatar {
+    border-color: #e50914;
+    animation: youtube-pulse 2s infinite;
+}
+
+@keyframes twitch-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(145, 71, 255, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(145, 71, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(145, 71, 255, 0); }
+}
+
+@keyframes youtube-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(229, 9, 20, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(229, 9, 20, 0); }
+}
+
+/* Metadata Text Elements */
 .player-name {
-    font-size: 0.95rem;
-    font-weight: bold;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
     color: #fff;
 }
 
 .status-text {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: #888;
-    margin-bottom: 10px;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
+.is-live .status-text {
+    color: #bfa3ff;
+}
+
+.is-live.live-youtube .status-text {
+    color: #ff9999;
+}
+
+/* Integrated Interaction Buttons */
 .button-group {
     display: flex;
-    gap: 6px;
+    gap: 0.5rem;
     width: 100%;
-    justify-content: center;
+    margin-top: auto;
 }
 
 .platform-btn {
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: bold;
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
     text-decoration: none;
-    color: white;
+    border-radius: 8px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
 }
 
-.twitch-btn { background-color: #6441a5; }
-.youtube-btn { background-color: #c4302b; }
-
-/* LIVE ANIMATIONS AND HIGHLIGHTS */
-.player-card.is-live {
-    filter: grayscale(0%);
-    opacity: 1;
-    border-color: #9146ff;
-    box-shadow: 0 0 15px rgba(145, 70, 255, 0.4);
-}
-.player-card.is-live .avatar {
-    border-color: #9146ff;
-}
-.player-card.is-live .status-text {
-    color: #9146ff;
-    font-weight: bold;
+.twitch-btn:hover {
+    background: #9147ff;
+    border-color: #9147ff;
+    box-shadow: 0 4px 12px rgba(145, 71, 255, 0.4);
 }
 
-/* YouTube Specific Highlights */
-.player-card.is-live.live-youtube {
-    border-color: #ff0000;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+.youtube-btn:hover {
+    background: #e50914;
+    border-color: #e50914;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.4);
 }
-.player-card.is-live.live-youtube .avatar {
-    border-color: #ff0000;
-}
-.player-card.is-live.live-youtube .status-text {
-    color: #ff0000;
+
+/* Feature 4 Keyframe: Card Entrance Effect */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
