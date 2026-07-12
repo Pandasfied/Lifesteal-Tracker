@@ -1,6 +1,5 @@
 import json
 import requests
-import re
 
 players = [
     {"name": "4CVIT", "twitch": "4cvit", "yt": "4CVIT"},
@@ -8,7 +7,7 @@ players = [
     {"name": "Baconnwaffles0", "twitch": "baconnwaffles0", "yt": "baconnwaffleso"},
     {"name": "CHIEFXD", "twitch": "chiefxd", "yt": "Chiefxd."},
     {"name": "ClownPierce", "twitch": "clownpierce", "yt": "ClownPierce"},
-    {"name": "Derapchu", "twitch": "derapchulive", "yt": "Derapchu"},
+    {"name": "Derapchu", "twitch": "Derapchu", "yt": "Derapchu"},
     {"name": "Dtowncat", "twitch": "dtowncat", "yt": "Dtowncat"},
     {"name": "ECorridor", "twitch": "ecorridor", "yt": "ECorridor"},
     {"name": "Hannahxxrose", "twitch": "hannahxxrose", "yt": "Hannahxxrose"},
@@ -25,7 +24,7 @@ players = [
     {"name": "Poafa", "twitch": "poafa", "yt": "Poafa"},
     {"name": "PrinceZam", "twitch": "princezam", "yt": "PrinceZam"},
     {"name": "Reddoons", "twitch": "reddoons", "yt": "reddoons"},
-    {"name": "Rekrap2", "twitch": "rekrap22", "yt": "rekrap2"},
+    {"name": "Rekrap2", "twitch": "rekrap2", "yt": "rekrap2"},
     {"name": "Roshambogames", "twitch": "roshambogamesLIVE", "yt": "roshambogames"},
     {"name": "SB737", "twitch": "sb737", "yt": "SB737"},
     {"name": "Spepticle", "twitch": "spepticle", "yt": "Spepticle"},
@@ -45,9 +44,9 @@ players = [
     {"name": "KatieGoBrr", "twitch": "katiegobrr", "yt": "KatieGoBrr"},
     {"name": "Leekleek", "twitch": "leekleeklive", "yt": "leekleekmc"},
     {"name": "Loppezz", "twitch": "loppezz", "yt": "loppezz"},
-    {"name": "LuigiToan", "twitch": "LuigiToantv", "yt": "Luigi Toan"},
+    {"name": "LuigiToan", "twitch": "Toan", "yt": "Luigi Toan"},
     {"name": "Only A Squid", "twitch": "only_a_squid", "yt": "OnlyASquid"},
-    {"name": "Spongs", "twitch": None, "yt": "Spongs"},
+    {"name": "Spongs", "twitch": "Spongs_", "yt": "Spongs"},
     {"name": "WithMayX", "twitch": "withmayx", "yt": "WithMayX"},
     {"name": "BranzyCraft", "twitch": "branzylive", "yt": "Branzy"}
 ]
@@ -60,7 +59,6 @@ for p in players:
     is_live = False
     platform = "offline"
     
-    # 1. Check Twitch via official public badge asset (Fast & Allowed)
     if p["twitch"]:
         try:
             r = requests.get(f'https://img.shields.io/twitch/status/{p["twitch"]}', timeout=5)
@@ -70,7 +68,6 @@ for p in players:
         except Exception:
             pass
 
-    # 2. Check YouTube if not live on Twitch
     if not is_live and p["yt"]:
         try:
             url = f'https://www.youtube.com/@{p["yt"]}/live'
@@ -86,6 +83,5 @@ for p in players:
         "platform": platform
     }
 
-# Write out the final tiny state file
 with open('status.json', 'w') as f:
     json.dump(status_results, f, indent=2)
