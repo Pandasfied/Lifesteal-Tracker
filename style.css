@@ -7,7 +7,22 @@
 }
 
 body {
-    background: radial-gradient(circle at center, #1a0f1a 0%, #0a050a 100%);
+    /* Covers the screen with the image, adds a subtle dark overlay to keep text readable */
+    background: linear-gradient(rgba(10, 5, 10, 0.4), rgba(10, 5, 10, 0.4)), 
+                url('Netherrack_background_BE2.png');
+    
+    /* Forces the image to stretch/scale to fit the entire screen size perfectly */
+    background-size: cover;
+    
+    /* Centers the background image so the gradient looks uniform */
+    background-position: center;
+    
+    /* STOPS it from tiling/repeating */
+    background-repeat: no-repeat;
+    
+    /* Keeps the background locked in place so it doesn't move when scrolling */
+    background-attachment: fixed;
+    
     color: #ffffff;
     min-height: 100vh;
     padding: 2rem 1rem;
