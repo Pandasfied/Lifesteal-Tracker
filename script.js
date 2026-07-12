@@ -4,7 +4,7 @@ const players = [
     { name: "Baconnwaffles0", twitch: "baconnwaffles0", yt: "baconnwaffleso" },
     { name: "CHIEFXD", twitch: "chiefxd", yt: "Chiefxd." },
     { name: "ClownPierce", twitch: "clownpierce", yt: "ClownPierce" },
-    { name: "Derapchu", twitch: "Derapchu", yt: "Derapchu" }, // Fixed twitch
+    { name: "Derapchu", twitch: "Derapchu", yt: "Derapchu" },
     { name: "Dtowncat", twitch: "dtowncat", yt: "Dtowncat" },
     { name: "ECorridor", twitch: "ecorridor", yt: "ECorridor" },
     { name: "Hannahxxrose", twitch: "hannahxxrose", yt: "Hannahxxrose" },
@@ -12,7 +12,7 @@ const players = [
     { name: "Jojosolos", twitch: "jojosolos", yt: "jojosolos" },
     { name: "JumperWho", twitch: "jumperwho", yt: "jumperwho" },
     { name: "Leow0ok", twitch: "leowook", yt: "Leowook" },
-    { name: "Mapicc", twitch: "mapicbutlive", yt: "MapiccMc" },
+    { name: "Mapicc", twitch: "mapicc", yt: "MapiccMc" }, // Updated Twitch handle
     { name: "Minute Tech", twitch: null, yt: "minutetechmc" },
     { name: "MrCube6", twitch: "mrcube6", yt: "MrCube6" },
     { name: "Pangi", twitch: "pangi", yt: "Pangi" },
@@ -21,7 +21,7 @@ const players = [
     { name: "Poafa", twitch: "poafa", yt: "Poafa" },
     { name: "PrinceZam", twitch: "princezam", yt: "PrinceZam" },
     { name: "Reddoons", twitch: "reddoons", yt: "reddoons" },
-    { name: "Rekrap2", twitch: "rekrap2", yt: "rekrap2" }, // Fixed twitch
+    { name: "Rekrap2", twitch: "rekrap2", yt: "rekrap2" },
     { name: "Roshambogames", twitch: "roshambogamesLIVE", yt: "roshambogames" },
     { name: "SB737", twitch: "sb737", yt: "SB737" },
     { name: "Spepticle", twitch: "spepticle", yt: "Spepticle" },
@@ -30,20 +30,20 @@ const players = [
     { name: "Vitalasy", twitch: "vitalasy", yt: "Vitalasy" },
     { name: "Vort3xDragon", twitch: "vort3xdragonlive", yt: "Vort3xDragon" },
     { name: "Woogiex", twitch: "woogiex", yt: "woogiex" },
-    { name: "Yeah Jaron", twitch: "yeah_jaron", yt: "Yeah_Jaron", ign: "Yeah_Jaron" }, // Fixed skin
+    { name: "Yeah Jaron", twitch: "yeah_jaron", yt: "Yeah_Jaron", ign: "Yeah_Jaron" },
     { name: "Yungyx", twitch: "yungy", yt: "yungwillx" },
-    { name: "CookieBunsquat", twitch: null, yt: "cookiebunsquat" },
-    { name: "Epaxialfx", twitch: null, yt: "EpaxialLive" },
+    { name: "CookieBunsquat", twitch: "CookieBunsquat", yt: "cookiebunsquat" }, // Added Twitch
+    { name: "Epaxialfx", twitch: "epaxial_", yt: "EpaxialYT" }, // Updated Twitch and YouTube handles
     { name: "Flowtives", twitch: "flowtives", yt: "flowtives" },
     { name: "Fruitberries", twitch: "fruitberries", yt: "Fruitberries" },
     { name: "Infume", twitch: "infume", yt: "infumemc" },
-    { name: "Jaden MAN", twitch: "jadenman_live", yt: "JadenMAN", ign: "Jaden_MAN" }, // Fixed skin
+    { name: "Jaden MAN", twitch: "jadenman_live", yt: "JadenMAN", ign: "Jaden_MAN" },
     { name: "KatieGoBrr", twitch: "katiegobrr", yt: "KatieGoBrr" },
     { name: "Leekleek", twitch: "leekleeklive", yt: "leekleekmc" },
     { name: "Loppezz", twitch: "loppezz", yt: "loppezz" },
-    { name: "LuigiToan", twitch: "Toan", yt: "Luigi Toan" }, // Fixed twitch
-    { name: "Only A Squid", twitch: "only_a_squid", yt: "OnlyASquid", ign: "only_a_squid" }, // Fixed skin
-    { name: "Spongs", twitch: "Spongs_", yt: "Spongs" }, // Added twitch
+    { name: "LuigiToan", twitch: "Toan", yt: "Luigi Toan" },
+    { name: "Only A Squid", twitch: "only_a_squid", yt: "OnlyASquid", ign: "only_a_squid" },
+    { name: "Spongs", twitch: "Spongs_", yt: "Spongs" },
     { name: "WithMayX", twitch: "withmayx", yt: "WithMayX" },
     { name: "BranzyCraft", twitch: "branzylive", yt: "Branzy" }
 ];
@@ -87,7 +87,6 @@ async function updateGridWithLiveStatus() {
         const statusData = await response.json();
         const grid = document.getElementById('player-grid');
 
-        // Step 1: Update statuses and visuals
         players.forEach(player => {
             const cleanID = player.name.replace(/\s/g, "");
             const cardElement = document.getElementById(`card-${cleanID}`);
@@ -98,7 +97,7 @@ async function updateGridWithLiveStatus() {
 
             if (playerData.isLive) {
                 cardElement.classList.add('is-live');
-                cardElement.setAttribute('data-live', 'true'); // Flag for sorting
+                cardElement.setAttribute('data-live', 'true');
                 if (playerData.platform === 'youtube') {
                     cardElement.classList.add('live-youtube');
                     statusText.innerText = "🔴 Live on YouTube";
@@ -108,23 +107,20 @@ async function updateGridWithLiveStatus() {
                 }
             } else {
                 cardElement.classList.remove('is-live', 'live-youtube');
-                cardElement.setAttribute('data-live', 'false'); // Flag for sorting
+                cardElement.setAttribute('data-live', 'false');
                 statusText.innerText = "Offline";
             }
-        }); // 🌟 Fixed: Perfectly closed the forEach loop block here!
+        });
 
-        // Step 2: Sort the DOM layout so live streams shift to the top
         const cardsArray = Array.from(grid.children);
         cardsArray.sort((a, b) => {
             const aLive = a.getAttribute('data-live') === 'true' ? 1 : 0;
             const bLive = b.getAttribute('data-live') === 'true' ? 1 : 0;
-            return bLive - aLive; // High values (1) go first
+            return bLive - aLive;
         });
 
-        // Re-append cards in sorted order
         cardsArray.forEach(card => grid.appendChild(card));
 
-        // Step 3: Update Header counters
         const totalLive = players.filter(p => statusData[p.name]?.isLive).length;
         const totalOffline = players.length - totalLive;
         document.getElementById('live-count').innerText = totalLive;
